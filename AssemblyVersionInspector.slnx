@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/AssemblyVersionInspector/AssemblyVersionInspector.csproj" />
+    <Project Path="src/AssemblyVersionInspector.Core/AssemblyVersionInspector.Core.csproj" />
+    <Project Path="src/AssemblyVersionInspector.CLI/AssemblyVersionInspector.CLI.csproj" />
   </Folder>
 </Solution>
