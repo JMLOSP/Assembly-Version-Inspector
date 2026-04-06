@@ -35,6 +35,8 @@ internal class Program
         {
           Console.WriteLine(string.Format("  AssemblyName: {0}", result.AssemblyName));
           Console.WriteLine(string.Format("  AssemblyVersion: {0}", result.AssemblyVersion));
+          Console.WriteLine(string.Format("  AssemblyFullName: {0}", result.AssemblyFullName));
+          Console.WriteLine(string.Format("  FileVersion: {0}", result.FileVersion));
         }
         else
           Console.WriteLine(string.Format("  Error: {0}", result.ErrorMessage));

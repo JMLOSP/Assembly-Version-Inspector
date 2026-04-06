@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -48,6 +49,13 @@ namespace AssemblyVersionInspector.Core
           result.IsManagedAssembly = true;
           result.AssemblyName = assemblyName.Name;
           result.AssemblyVersion = GetAssemblyVersion(assemblyName);
+          result.AssemblyFullName = assemblyName.FullName;
+
+          //get file version
+          FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(dllFile);
+
+          //if file version is not available, it will return empty string
+          result.FileVersion = fileVersionInfo.FileVersion;
         }
         catch (BadImageFormatException)
         {
