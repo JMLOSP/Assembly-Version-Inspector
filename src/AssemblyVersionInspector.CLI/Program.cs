@@ -26,27 +26,52 @@ internal class Program
       //get results
       List<AssemblyScanResult> results = scanner.ScanFolder(folderPath);
 
-      //display results
-      foreach (AssemblyScanResult result in results)
-      {
-        Console.WriteLine(string.Format("File: {0}", result.FileName));
-
-        if (result.IsManagedAssembly)
-        {
-          Console.WriteLine(string.Format("  AssemblyName: {0}", result.AssemblyName));
-          Console.WriteLine(string.Format("  AssemblyVersion: {0}", result.AssemblyVersion));
-          Console.WriteLine(string.Format("  AssemblyFullName: {0}", result.AssemblyFullName));
-          Console.WriteLine(string.Format("  FileVersion: {0}", result.FileVersion));
-        }
-        else
-          Console.WriteLine(string.Format("  Error: {0}", result.ErrorMessage));
-
-        Console.WriteLine();
-      }
+      //print results
+      PrintResults(results);
     }
     catch (Exception ex)
     {
       Console.WriteLine(string.Format("Fatal error: {0}", ex.Message));
     }
+  }
+
+  private static void PrintResults(List<AssemblyScanResult> results)
+  {
+    Console.WriteLine("=== Assembly Inspection ===");
+    Console.WriteLine();
+
+    foreach (AssemblyScanResult result in results)
+    {
+      if (result.IsManagedAssembly)
+        PrintManagedAssembly(result);
+      else
+        PrintErrorAssembly(result);
+
+      Console.WriteLine();
+    }
+  }
+
+  private static void PrintManagedAssembly(AssemblyScanResult result)
+  {
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.Write("[OK] ");
+    Console.ResetColor();
+
+    Console.WriteLine(result.FileName);
+
+    Console.WriteLine(string.Format("  AssemblyName:     {0}", result.AssemblyName));
+    Console.WriteLine(string.Format("  AssemblyVersion:  {0}", result.AssemblyVersion));
+    Console.WriteLine(string.Format("  AssemblyFullName: {0}", result.AssemblyFullName));
+    Console.WriteLine(string.Format("  FileVersion:      {0}", result.FileVersion));
+  }
+
+  private static void PrintErrorAssembly(AssemblyScanResult result)
+  {
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.Write("[ERROR] ");
+    Console.ResetColor();
+
+    Console.WriteLine(result.FileName);
+    Console.WriteLine(string.Format("  {0}", result.ErrorMessage));
   }
 }
