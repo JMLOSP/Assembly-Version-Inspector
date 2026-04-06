@@ -1,16 +1,18 @@
 # AssemblyVersionInspector
 
-Tooling project focused on .NET assembly inspection.
+Small .NET tool to inspect assemblies in a folder and display version information.
 
-## Goal
-Analyze assemblies in a folder, detect version mismatches and dependency conflicts, and help generate binding redirects for .NET Framework projects.
+## Features
 
-## Initial scope
-- Scan DLLs in a target folder
-- Read AssemblyVersion/FileVersion
-- Detect duplicated assemblies with different versions
-- Report potential conflicts
-- Suggest binding redirects
+- Scan a folder for .dll files
+- Detect managed vs non-managed assemblies
+- Extract:
+  - Assembly Name
+  - Assembly Version
+  - File Version
+  - Full Assembly Name
 
-## Status
-Early private prototype.
+## Usage
+
+```bash
+AssemblyVersionInspector.Cli <folder-path>
